@@ -23,6 +23,16 @@ public class Evaluator {
 		return eval(elseExp, env);
 	    }
 	}
+	if (isTaggedList(exp, Symbol.getSymbol("begin"))) {
+	    List exps = ((List)exp).getRest();
+	    LispValue val = Nil.getInstance();
+
+	    for ( ; !exps.isNull(); exps = exps.getRest()) {
+		LispValue e = exps.getFirst();
+		val = eval(e, env);
+	    }
+	    return val;
+	}
 	if (isTaggedList(exp, Symbol.getSymbol("set!"))) {
 	    LispValue[] exps = ((List)exp).getRest().toArray();
 	    LispValue settee = exps[0];
