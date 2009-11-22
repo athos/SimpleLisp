@@ -42,11 +42,21 @@ public class Evaluator {
 	    return Symbol.getSymbol("ok");
 	}
 	if (isTaggedList(exp, Symbol.getSymbol("define"))) {
-	    LispValue[] exps = ((List)exp).getRest().toArray();
-	    LispValue definee = exps[0];
-	    LispValue e = exps[1];
+	    List exps = ((List)exp).getRest();
+	    LispValue definee = exps.getFirst();
+	    List rest = exps.getRest();
 
-	    env.addBindingValue((Symbol)definee, eval(e, env));
+	    LispValue n;
+	    LispValue e;
+	    if (definee.isList()) {
+		n = ((List)definee).getFirst();
+		e = new Cons(Symbol.getSymbol("lambda"),
+			     new Cons(((List)definee).getRest(), rest));
+	    } else {
+		n = definee;
+		e = rest.getFirst();
+	    }
+	    env.addBindingValue((Symbol)n, eval(e, env));
 	    return Symbol.getSymbol("ok");
 	}
 	if (isTaggedList(exp, Symbol.getSymbol("lambda"))) {
