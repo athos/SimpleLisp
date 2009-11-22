@@ -63,4 +63,20 @@ public class Evaluator {
     private boolean isTaggedList(LispValue exp, Symbol symbol) {
 	return exp.isCons() && ((Cons)exp).getCar() == symbol;
     }
+
+    private List getEvaledArgs(List args, Env env) {
+	List vals = Nil.getInstance();
+	for ( ; !args.isNull(); args = args.getRest()) {
+	    vals = new Cons(eval(args.getFirst(), env), vals);
+	}
+	return getReverseList(vals);
+    }
+
+    private List getReverseList(List vals) {
+	List reversed = Nil.getInstance();
+	for ( ; !vals.isNull(); vals = vals.getRest()) {
+	    reversed = new Cons(vals.getFirst(), reversed);
+	}
+	return reversed;
+    }
 }
