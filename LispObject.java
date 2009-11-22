@@ -17,6 +17,14 @@ public abstract class LispObject implements LispValue {
 	return false;
     }
 
+    public boolean isBool() {
+	return false;
+    }
+
+    public boolean isEOF() {
+	return false;
+    }
+
     public boolean isList() {
 	return false;
     }

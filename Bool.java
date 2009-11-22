@@ -16,6 +16,10 @@ public class Bool extends LispObject {
 	return this == falseValue;
     }
 
+    public boolean isBool() {
+	return true;
+    }
+
     public Bool negateValue() {
 	if (isFalse()) {
 	    return trueValue;
