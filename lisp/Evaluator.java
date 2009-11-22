@@ -60,9 +60,9 @@ public class Evaluator {
 	    return Symbol.getSymbol("ok");
 	}
 	if (isTaggedList(exp, Symbol.getSymbol("lambda"))) {
-	    LispValue[] exps = ((List)exp).getRest().toArray();
-	    List args = (List)exps[0];
-	    LispValue body = exps[1];
+	    List exps = ((List)exp).getRest();
+	    List args = (List)exps.getFirst();
+	    List body = new Cons(Symbol.getSymbol("begin"), exps.getRest());
 
 	    return new Closure(args, body, env);
 	}
