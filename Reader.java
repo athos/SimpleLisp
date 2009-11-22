@@ -170,11 +170,4 @@ public class Reader {
 	    return Bool.getInstance(false);
 	}
     }
-
-    public static void main(String[] args) throws IOException {
-	StringReader r = new StringReader(args[0]);
-	Reader reader = new Reader(r);
-
-	System.out.println(reader.read());
-    }
 }
