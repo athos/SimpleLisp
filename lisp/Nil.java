@@ -26,4 +26,12 @@ public class Nil extends LispObject implements List {
     public String toString() {
 	return "()";
     }
+
+    public Number getLength() {
+	return Number.getNumber(0);
+    }
+
+    public LispValue[] toArray() {
+	return new LispValue[0];
+    }
 }

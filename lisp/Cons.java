@@ -68,4 +68,25 @@ public class Cons extends LispObject implements List {
 
 	return builder.toString();
     }
+
+    public Number getLength() {
+	int len = 0;
+
+	for (List list = this; !list.isNull(); list = list.getRest()) {
+	    len++;
+	}
+	return Number.getNumber(len);
+    }
+
+    public LispValue[] toArray() {
+	Number len = getLength();
+	LispValue[] array = new LispValue[len.getValue()];
+
+	List list = this;
+	for (int i = 0; !list.isNull(); i++) {
+	    array[i] = list.getFirst();
+	    list = list.getRest();
+	}
+	return array;
+    }
 }
