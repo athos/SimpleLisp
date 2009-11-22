@@ -88,7 +88,8 @@ public class Reader {
 	    || ch == '!' || ch == '%' || ch == '&'
 	    || ch == '^' || ch == '-' || ch == '='
 	    || ch == '@' || ch == '+' || ch == ':'
-	    || ch == '*' || ch == '/' || ch == '_';
+	    || ch == '*' || ch == '/' || ch == '_'
+	    || ch == '<' || ch == '>' || ch == '?';
     }
 
     private List createList(LispValue v1, LispValue v2) {
