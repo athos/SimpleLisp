@@ -47,7 +47,7 @@ public class Env {
 	return env;
     }
 
-    public void extend(List vars, List vals) {
+    public Env extend(List vars, List vals) {
 	while (!vars.isNull() && !vals.isNull()) {
 	    Symbol sym = (Symbol)((Cons)vars).getCar();
 	    LispValue val = ((Cons)vals).getCar();
@@ -57,6 +57,7 @@ public class Env {
 	    vars = vars.getRest();
 	    vals = vals.getRest();
 	}
+	return this;
     }
 
     public LispValue getBindingValue(Symbol sym) {

@@ -9,4 +9,5 @@ public interface LispValue {
     public boolean isEOF();
     public boolean isList();
     public boolean isCons();
+    public boolean isProcedure();
 }

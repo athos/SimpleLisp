@@ -32,4 +32,8 @@ public abstract class LispObject implements LispValue {
     public boolean isCons() {
 	return false;
     }
+
+    public boolean isProcedure() {
+	return false;
+    }
 }

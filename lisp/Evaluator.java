@@ -39,7 +39,25 @@ public class Evaluator {
 	    env.addBindingValue((Symbol)definee, eval(e, env));
 	    return Symbol.getSymbol("ok");
 	}
-	return Nil.getInstance();
+	if (isTaggedList(exp, Symbol.getSymbol("lambda"))) {
+	    LispValue[] exps = ((List)exp).getRest().toArray();
+	    List args = (List)exps[0];
+	    LispValue body = exps[1];
+
+	    return new Closure(args, body, env);
+	}
+	if (exp.isCons()) {
+	    Procedure proc = (Procedure)eval(((Cons)exp).getCar(), env);
+	    List args = ((List)exp).getRest();
+	    List vals = getEvaledArgs(args, env);
+	    
+	    if (proc.isPrimitive()) {
+		return Nil.getInstance();
+	    } else {
+		return proc.apply(vals);
+	    }
+	}
+	return exp;
     }
 
     private boolean isTaggedList(LispValue exp, Symbol symbol) {
