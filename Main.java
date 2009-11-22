@@ -1,4 +1,5 @@
 import lisp.*;
+import java.util.*;
 import java.io.*;
 
 public class Main {
@@ -7,6 +8,7 @@ public class Main {
 	Evaluator evaluator = new Evaluator();
 	Env env = new Env();
 
+	installPrimitives(env);
 	while (true) {
 	    System.out.print("> ");
 	    System.out.flush();
@@ -18,5 +20,13 @@ public class Main {
 	    System.out.println(evaluator.eval(exp, env));
 	}
 	System.out.println();
+    }
+
+    private static void installPrimitives(Env env) {
+	Map<Symbol, Primitive> primitives = Primitive.getPrimitives();
+
+	for (Map.Entry<Symbol, Primitive> entry : primitives.entrySet()) {
+	    env.addBindingValue(entry.getKey(), entry.getValue());
+	}
     }
 }

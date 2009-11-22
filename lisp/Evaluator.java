@@ -61,11 +61,7 @@ public class Evaluator {
 	    List args = ((List)exp).getRest();
 	    List vals = getEvaledArgs(args, env);
 	    
-	    if (proc.isPrimitive()) {
-		return Nil.getInstance();
-	    } else {
-		return proc.apply(vals);
-	    }
+	    return proc.apply(vals);
 	}
 	return exp;
     }
