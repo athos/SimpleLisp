@@ -45,7 +45,9 @@ public class Reader {
     public LispValue read() throws IOException {
 	char ch = peekFirstNonspace();
 
-	if (Character.isDigit(ch)) {
+	if (ch == (char)-1) {
+	    return EOF.getInstance();
+	} else if (Character.isDigit(ch)) {
 	    return readNumber();
 	} else if (isIdentifierStart(ch)) {
 	    return readSymbol();
@@ -158,8 +160,10 @@ public class Reader {
 
 	char ch = peekChar();
 	if (ch == 't') {
+	    readChar();
 	    return Bool.getInstance(true);
 	} else if (ch == 'f') {
+	    readChar();
 	    return Bool.getInstance(false);
 	} else {
 	    // FIXME
