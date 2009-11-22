@@ -1,5 +1,4 @@
-package lisp;
-
+import lisp.*;
 import java.io.*;
 
 public class Main {
